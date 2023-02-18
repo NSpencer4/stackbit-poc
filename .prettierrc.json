@@ -1,0 +1,16 @@
+{
+  "trailingComma": "all",
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 160,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": ["*.md", "*.yaml"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}

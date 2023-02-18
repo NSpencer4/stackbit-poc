@@ -2,76 +2,77 @@ import * as fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 import frontmatter from 'front-matter';
-import sbConfig from './../../stackbit.config';
 import * as types from 'types';
+import sbConfig from '../../stackbit.config';
 
 if (!sbConfig.pagesDir || !sbConfig.dataDir) throw new Error('Invalid Stackbit config file');
 
-export const siteConfigFile = sbConfig.dataDir + '/config.json';
+export const siteConfigFile = `${sbConfig.dataDir}/config.json`;
 
 const supportedFileTypes = ['md', 'json'];
 
 function contentFilesInPath(dir: string) {
-    const globPattern = `${dir}/**/*.{${supportedFileTypes.join(',')}}`;
-    return glob.sync(globPattern);
+  const globPattern = `${dir}/**/*.{${supportedFileTypes.join(',')}}`;
+  return glob.sync(globPattern);
 }
 
 function readContent(file: string): types.Document {
-    const rawContent = fs.readFileSync(file, 'utf8');
-    let content = null;
-    switch (path.extname(file).substring(1)) {
-        case 'md':
-            const parsedMd = frontmatter<Record<string, any>>(rawContent);
-            content = {
-                ...parsedMd.attributes,
-                body: parsedMd.body
-            };
-            break;
-        case 'json':
-            content = JSON.parse(rawContent);
-            break;
-        default:
-            throw Error(`Unhandled file type: ${file}`);
-    }
+  const rawContent = fs.readFileSync(file, 'utf8');
+  let content: { [p: string]: unknown; body: string };
+  switch (path.extname(file).substring(1)) {
+    case 'md':
+      const parsedMd = frontmatter<Record<string, unknown>>(rawContent);
+      content = {
+        ...parsedMd.attributes,
+        body: parsedMd.body,
+      };
+      break;
+    case 'json':
+      content = JSON.parse(rawContent) as { [p: string]: unknown; body: string };
+      break;
+    default:
+      throw Error(`Unhandled file type: ${file}`);
+  }
 
-    content.__id = file;
-    content.__url = fileToUrl(file);
-    return content;
+  content['__id'] = file;
+  content['__url'] = fileToUrl(file);
+  return content as types.Document;
 }
 
 function fileToUrl(file: string) {
-    if (!file.startsWith(sbConfig.pagesDir)) return null;
+  if (!file.startsWith(sbConfig.pagesDir)) return null;
 
-    let url = file.slice(sbConfig.pagesDir.length);
-    url = url.split('.')[0];
-    if (url.endsWith('/index')) {
-        url = url.slice(0, -6) || '/';
-    }
-    return url;
+  let url = file.slice(sbConfig.pagesDir.length);
+  url = url.split('.')[0];
+  if (url.endsWith('/index')) {
+    url = url.slice(0, -6) || '/';
+  }
+  return url;
 }
 
 function urlToFilePairs() {
-    const pageFiles = contentFilesInPath(sbConfig.pagesDir);
-    return pageFiles.map((file) => [fileToUrl(file), file]);
+  const pageFiles = contentFilesInPath(sbConfig.pagesDir);
+  return pageFiles.map((file) => [fileToUrl(file), file]);
 }
 
 export function urlToContent(url: string) {
-    const urlToFile = Object.fromEntries(urlToFilePairs());
-    const file = urlToFile[url];
-    return readContent(file);
+  const urlToFile = Object.fromEntries(urlToFilePairs()) as { [k: string]: string };
+  const file = urlToFile[url];
+  return readContent(file);
 }
 
 export function pagesByType(contentType: types.DocumentTypeNames) {
-    let result: Record<string, types.Document> = {};
-    for (const [url, file] of urlToFilePairs()) {
-        if (file) {
-            const content = readContent(file);
-            if (url && content.type === contentType) result[url] = content;
-        }
+  const result: Record<string, types.Document> = {};
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [url, file] of urlToFilePairs()) {
+    if (file) {
+      const content = readContent(file);
+      if (url && content.type === contentType) result[url] = content;
     }
-    return result;
+  }
+  return result;
 }
 
 export function siteConfig() {
-    return readContent(siteConfigFile) as types.Config;
+  return readContent(siteConfigFile) as types.Config;
 }

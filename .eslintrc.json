@@ -1,0 +1,159 @@
+{
+    "root": true,
+    "env": {
+        "es6": true,
+        "node": true,
+        "browser": true,
+        "jest": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base",
+        "next/core-web-vitals",
+        "prettier",
+        "airbnb-typescript",
+        "airbnb-typescript/base",
+        "plugin:jsx-a11y/recommended",
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "plugins": [
+        "import",
+        "jsx-a11y",
+        "jest",
+        "prettier",
+        "@typescript-eslint",
+        "react",
+        "react-hooks"
+    ],
+    "globals": {
+        "React": true,
+        "JSX": true,
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "arrowFunctions": true,
+            "blockBindings": true,
+            "classes": true,
+            "defaultParams": true,
+            "destructuring": true,
+            "forOf": true,
+            "modules": true,
+            "objectLiteralComputedProperties": true,
+            "objectLiteralShorthandMethods": true,
+            "objectLiteralShorthandProperties": true,
+            "spread": true,
+            "superInFunctions": true,
+            "templateStrings": true,
+            "unicodeCodePointEscapes": true,
+            "jsx": true
+        },
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "@typescript-eslint/comma-dangle": 0,
+        "@typescript-eslint/comma-spacing": ["error", {"before":  false, "after":  true}],
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/no-unused-vars": ["error"],
+        "class-methods-use-this": "off",
+        "comma-spacing": "off",
+        "func-style": ["error", "declaration", {"allowArrowFunctions":  true}],
+        "import/no-extraneous-dependencies": "off",
+        "import/prefer-default-export": 0,
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "linebreak-style": 0,
+        "no-console": "warn",
+        "no-else-return": ["error", {"allowElseIf": true}],
+        "no-return-assign": 0,
+        "no-shadow": "off",
+        "no-unused-vars": "off",
+        "no-case-declarations": "off",
+        "prefer-destructuring": "warn",
+        "no-use-before-define": "off",
+        "no-underscore-dangle": "warn",
+        "one-var": 0,
+        "@typescript-eslint/no-var-requires": "off",
+        "allow-parens": "off",
+        "global-require": "off",
+        "prettier/prettier": "error",
+        "react/button-has-type": 0,
+        "react/forbid-prop-types": 0,
+        "react/jsx-no-undef": [1 , { "allowGlobals": true }],
+        "react/jsx-props-no-spreading": 0,
+        "react/no-unescaped-entities": ["error", { "forbid": [">", "}"] }],
+        "react/prop-types": [1, { "skipUndeclared": true }],
+        "react/react-in-jsx-scope": "off",
+        "spaced-comment": 0,
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "@typescript-eslint/no-use-before-define": [
+            "error",
+            {
+                "functions": false
+            }
+        ],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ]
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "rules": {
+                "import/no-extraneous-dependencies": [
+                    "error", {
+                        "packageDir": ["."]
+                    }
+                ]
+            }
+        },
+        {
+            "files": ["./**/*.test.ts"],
+            "rules": {
+                "@typescript-eslint/unbound-method": "warn",
+                "jest/unbound-method": "warn"
+            }
+        }
+    ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".ts", ".tsx", ".js", ".jsx"],
+                "moduleDirectory": ["node_modules", "src"]
+            }
+        }
+    },
+    "ignorePatterns": [
+        "testing",
+        "jest.config.ts",
+        "rollup.config.ts"
+    ]
+}
