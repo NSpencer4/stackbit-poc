@@ -11,7 +11,7 @@ sections:
       more.](https://docs.stackbit.com/how-to-guides/local-development/)
     actions:
       - type: Button
-        label: Start Buildingg
+        label: Start Building
         url: 'https://docs.stackbit.com/getting-started/'
         size: large
         variant: contained
