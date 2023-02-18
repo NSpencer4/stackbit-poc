@@ -1,47 +1,62 @@
 {
-    "compilerOptions": {
-        "rootDirs": ["."],
-        "baseUrl": ".",
-        "target": "es2020",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": false,
-        "allowSyntheticDefaultImports": true,
-        "alwaysStrict": true,
-        "declaration": false,
-        "emitDecoratorMetadata": true,
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "forceConsistentCasingInFileNames": true,
-        "importHelpers": true,
-        "inlineSourceMap": true,
-        "inlineSources": true,
-        "isolatedModules": true,
-        "jsx": "react",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "noEmit": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "noImplicitOverride": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "noPropertyAccessFromIndexSignature": true,
-        "outDir": "dist",
-        "resolveJsonModule": true,
-        "skipDefaultLibCheck": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "strictFunctionTypes": true,
-        "strictNullChecks": true,
-        "strictPropertyInitialization": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noErrorTruncation": true,
-        "incremental": true,
-        "paths": {
-            "types": ["./src/types/index.ts"]
-        }
-    },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "stackbit.config.ts"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "rootDirs": [
+      "."
+    ],
+    "baseUrl": ".",
+    "target": "es2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noErrorTruncation": true,
+    "incremental": true,
+    "paths": {
+      "types": [
+        "./src/types/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "stackbit.config.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
